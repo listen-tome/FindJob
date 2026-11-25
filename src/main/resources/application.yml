@@ -1,12 +1,20 @@
 server:
-  port: 8080
+  port: 8082
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/FindJob?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
-    username: root
-    password: ROOT
+    url: jdbc:mysql://localhost:3306/findjob?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: FindJob
+    password: edKpdJDrefLTKn3Y
     driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
+      encoding: UTF-8
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 12MB
 
 mybatis-plus:
   configuration:
@@ -14,7 +22,11 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
+
 jwt:
   secret: ${JWT_SECRET:findjob-dev-only-secret-please-replace-in-production-min-64-bytes-abc123}
   expire-minutes: 120
 
+app:
+  upload-dir: ${APP_UPLOAD_DIR:uploads/resumes}
+  file-base-url: ${APP_FILE_BASE_URL:http://localhost:8080/files/resumes}
